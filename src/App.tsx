@@ -154,12 +154,14 @@ export const App: React.FC = () => {
       });
   }
 
-  const completedTodos = todos.filter(todo => todo.completed);
+  const completedTodosID = todos
+    .filter(todo => todo.completed)
+    .map(todo => todo.id);
 
   function handleClearCompleted() {
-    completedTodos.forEach(todo =>
+    completedTodosID.forEach(id =>
       todoService
-        .deleteTodo(todo.id)
+        .deleteTodo(id)
         .then(() => {
           setTodos(currTodos => currTodos.filter(tod => !tod.completed));
         })
